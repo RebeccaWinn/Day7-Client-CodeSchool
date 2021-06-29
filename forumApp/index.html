@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <div id="app">
+
+        <h1>Forum App</h1>
+        <button v-on:click="page = 'forum'">Forum</button>
+        <button v-on:click="page = 'thread'">New thread</button><br>
+
+        <!-- IF THE PAGE IS FORUM -->
+        <div v-if="page == 'forum'">
+
+            <!-- Category dropdown select -->
+            <h3>Select a category</h3>
+            <select v-model="selected_category">
+                <option v-for="category in categories">
+                    {{ category }}
+                </option>
+            </select>
+            {{ selected_category }}
+
+            <!-- Displaying threads -->
+            <div v-show="sorted_threads.length==0">
+                {{ threads_empty }}
+            </div>
+            <ul>
+                <li v-for="(thread,index) in sorted_threads">
+                    <h2> {{ thread.name }} </h2> 
+                    <p> {{ thread.author }}</p>
+                    <p> {{ thread.description }}</p>
+                    <p> {{ thread.category }}</p>
+
+                    <!-- Delete button here -->
+                    <button v-on:click="deleteThread(index)">Delete</button>
+                </li>
+            </ul>
+        </div>
+        <!-- END OF FORUM PAGE -->
+        
+
+        <!-- IF THE PAGE IS THREAD -->
+        <div v-else-if="page == 'thread'">
+        <!-- Create new thread-->
+        <h2>Create Thread</h2>
+        <label>Enter Title:</label>
+        <input v-model="new_name" type="text"><br>
+        <label>Author</label>
+        <input v-model="new_author" type="text"><br>
+        <label>Description</label>
+        <input v-model="new_description" type="text"><br>
+        <label>Category:</label>
+        <select v-model="new_category">
+            <option v-for="category in categories" v-bind:value="category">
+                {{ category }}
+            </option>
+        </select>
+        <button v-on:click="createThread()">Submit</button>
+        </div>
+        <!-- END OF PAGE THREAD -->
+
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="app.js"></script>
+</html>

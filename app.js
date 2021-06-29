@@ -36,4 +36,28 @@ var app = new Vue({
             }
         ]
     },
+
+    computed:{
+        // Property that holds only the articles that match the searchstring
+        //returns an array
+
+        filteredArticles: function(){
+            var articles_array= this.articles;
+            var searchString= this.searchString;
+
+            searchString = searchString.trim().toLowerCase();
+
+            articles_array= articles_array.filter(function(item){
+                if( item.title.toLowerCase().indexOf(searchString) != -1){
+                    return item
+                }
+            
+            })
+            return articles_array
+
+        }
+
+    }
+
+
 });

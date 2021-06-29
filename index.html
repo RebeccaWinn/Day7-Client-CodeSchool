@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <div id="app">
+
+        <!-- input for the search v-model something -->
+        <div class="bar">
+            <input type="text" v-model="searchString" placeholder=" Enter your search terms">
+
+        </div>
+
+
+        <!-- loop through articles and display each one-->
+        <!-- title with anchor tag -->
+        <!-- Display image -->
+        <ul>
+            <li v-for="article in filteredArticles">
+                <a v-bind:href="article.url">
+                    <img v-bind:src="article.image">
+                </a>
+                <p>{{ article.title }}</p>
+            </li>
+        </ul>
+
+
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="app.js"></script>
+</html>
